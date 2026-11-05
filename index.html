@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WESTERN STORES — Wedding Wear, Lehengas & Sherwanis | Shivaji Nagar, Bengaluru</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@1,500;1,600&display=swap" rel="stylesheet">
+<script>
+tailwind.config={theme:{extend:{colors:{maroon:'#7B1E26',deep:'#1C1414',gold:'#C9A86A',cream:'#FAF7F2',sand:'#F3EDE3'},fontFamily:{serif:['Playfair Display','serif'],sans:['Inter','sans-serif'],corm:['Cormorant Garamond','serif']}}}}
+</script>
+<style>
+*{-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{font-family:Inter,sans-serif;background:#FAF7F2;color:#1C1414}
+::-webkit-scrollbar{width:8px;height:6px}
+::-webkit-scrollbar-thumb{background:#C9A86A;border-radius:99px}
+::-webkit-scrollbar-track{background:#eee}
+.serif{font-family:'Playfair Display',serif}
+.no-scrollbar::-webkit-scrollbar{display:none}
+.no-scrollbar{scrollbar-width:none}
+.card:hover .card-img{transform:scale(1.06)}
+.card-img{transition:transform .7s cubic-bezier(.2,.8,.2,1)}
+.gold-line{height:1px;background:linear-gradient(90deg,transparent,#C9A86A,transparent)}
+.chip.active{background:#1C1414;color:white;border-color:#1C1414}
+.rate-bar{display:flex;align-items:center;gap:10px;cursor:pointer}
+.rate-bar:hover .bar-fill{background:#7B1E26}
+.bar-track{flex:1;height:8px;background:#EDE6D8;border-radius:99px;overflow:hidden}
+.bar-fill{height:100%;background:#C9A86A;border-radius:99px;transition:width 1s ease}
+.fade-up{opacity:0;transform:translateY(20px);transition:all .7s ease}
+.fade-up.show{opacity:1;transform:none}
+.modal{transition:all .3s ease}
+.drawer{transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+input,select,textarea{outline:none}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="bg-[#1C1414] text-white text-[12px] sm:text-[13px]">
+<div class="max-w-7xl mx-auto px-4 py-2 flex flex-wrap justify-between items-center gap-2">
+<div class="flex items-center gap-4">
+<span class="flex items-center gap-1.5"><span id="openDot" class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse inline-block"></span><span id="openText">Open · Closes 9:30 pm</span></span>
+<span class="hidden md:inline text-white/60">|</span><span class="hidden md:inline">176/2 Commercial Street, Tasker Town, Shivaji Nagar</span>
+</div>
+<div class="flex items-center gap-3">
+<a href="tel:09341959192" class="hover:text-gold">📞 093419 59192</a>
+<a href="https://wa.me/919341959192?text=Hello%20Western%20Stores%2C%20I%20want%20to%20book%20a%20wedding%20trial" target="_blank" class="bg-[#25D366] text-white px-3 py-1 rounded-full font-semibold">WhatsApp Us</a>
+</div>
+</div>
+</div>
+
+<!-- NAV -->
+<header class="sticky top-0 z-40 bg-[#FAF7F2]/90 backdrop-blur border-b border-black/10">
+<div class="max-w-7xl mx-auto px-4 h-[72px] flex items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<div class="w-11 h-11 bg-maroon text-white serif font-black flex items-center justify-center text-xl rounded-full">W</div>
+<div>
+<div class="serif font-black leading-none text-[20px] tracking-wide">WESTERN STORES</div>
+<div class="text-[10px] tracking-[0.22em] text-zinc-500 font-semibold">ETHNIC • WEDDING • BENGALURU</div>
+</div>
+</div>
+<nav class="hidden lg:flex items-center gap-8 text-[13px] font-semibold">
+<a href="#collection" class="hover:text-maroon">SHOP</a>
+<a href="#categories" class="hover:text-maroon">COLLECTIONS</a>
+<a href="#reviews" class="hover:text-maroon">REVIEWS</a>
+<a href="#photos" class="hover:text-maroon">PHOTOS</a>
+<a href="#visit" class="hover:text-maroon">VISIT US</a>
+</nav>
+<div class="flex items-center gap-2">
+<button onclick="toggleSearch()" class="w-10 h-10 rounded-full border border-black/10 bg-white flex items-center justify-center">⌕</button>
+<button onclick="toggleWishlistView()" class="relative w-10 h-10 rounded-full border border-black/10 bg-white flex items-center justify-center">♡<span id="wishCount" class="absolute -top-1 -right-1 bg-maroon text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center">0</span></button>
+<button onclick="openCart()" class="relative h-10 px-4 rounded-full bg-black text-white flex items-center gap-2 text-sm font-semibold">🛍 <span class="hidden sm:inline">Cart</span><span id="cartCount" class="bg-gold text-black text-[11px] px-1.5 py-0.5 rounded-full">0</span></button>
+</div>
+</div>
+<div id="searchBar" class="hidden border-t border-black/10 bg-white">
+<div class="max-w-7xl mx-auto px-4 py-3 flex gap-2">
+<input id="searchInput" oninput="applyFilters()" placeholder="Search lehengas, sherwanis, sarees, jackets..." class="flex-1 px-4 py-3 rounded-full border border-zinc-200 text-sm">
+<button onclick="document.getElementById('collection').scrollIntoView({behavior:'smooth'})" class="bg-black text-white px-6 rounded-full text-sm font-semibold">Search</button>
+</div>
+</div>
+</header>
+
+<!-- HERO -->
+<section class="max-w-7xl mx-auto px-4 pt-6 lg:pt-10 pb-10">
+<div class="grid lg:grid-cols-12 gap-6 items-stretch">
+<div class="lg:col-span-6 bg-white rounded-[28px] p-6 sm:p-10 border border-black/5 flex flex-col justify-between">
+<div>
+<div class="inline-flex items-center gap-2 bg-sand border border-gold/40 rounded-full pl-2 pr-3 py-1 text-xs font-bold">
+<span class="bg-white px-2 py-1 rounded-full">★ 3.9</span> 1,096 Reviews · Clothing Store · Shivaji Nagar
+</div>
+<p class="font-corm italic text-2xl text-maroon mt-6">“Great service, good choice of clothing.”</p>
+<h1 class="serif text-[42px] sm:text-[58px] lg:text-[64px] leading-[0.95] font-black mt-2">Wedding Wear<br><span class="text-maroon">That Feels<br>Like You.</span></h1>
+<p class="text-zinc-600 mt-4 text-[15px] leading-relaxed max-w-md">Bengaluru's trusted ethnic boutique for lehengas, sherwanis, sarees & knitwear. Reasonable prices, helpful staff, and collections you'll love wearing — again and again.</p>
+
+<div class="flex flex-wrap gap-3 mt-6">
+<button onclick="document.getElementById('collection').scrollIntoView({behavior:'smooth'})" class="bg-maroon text-white px-6 py-3.5 rounded-full font-bold text-sm">Shop Wedding Edit →</button>
+<button onclick="openAppointment()" class="px-6 py-3.5 rounded-full border-2 border-black font-bold text-sm bg-white">Book Free Trial</button>
+</div>
+
+<div class="grid grid-cols-3 gap-3 mt-8">
+<div class="bg-cream rounded-2xl p-3 text-center"><div class="serif font-black text-xl">500+</div><div class="text-[11px] text-zinc-500 font-semibold">DESIGNS IN STORE</div></div>
+<div class="bg-cream rounded-2xl p-3 text-center"><div class="serif font-black text-xl">₹999<span class="text-sm">+</span></div><div class="text-[11px] text-zinc-500 font-semibold">STARTING PRICE</div></div>
+<div class="bg-cream rounded-2xl p-3 text-center"><div class="serif font-black text-xl">9:30 AM</div><div class="text-[11px] text-zinc-500 font-semibold">OPEN TILL 9:30 PM</div></div>
+</div>
+</div>
+<div class="flex items-center gap-3 mt-6 bg-[#FFF8E6] border border-amber-200 rounded-2xl p-3">
+<img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=200&auto=format&fit=crop" class="w-12 h-12 rounded-full object-cover">
+<div class="flex-1"><div class="text-xs font-bold">Most loved this week</div><div class="text-xs text-zinc-500">“So comfortable clothes and staffs are very friendly.. will visit again”</div></div>
+<div class="text-amber-500 text-sm">★★★★★</div>
+</div>
+</div>
+
+<div class="lg:col-span-6 grid grid-cols-2 gap-4">
+<div class="relative rounded-[28px] overflow-hidden min-h-[320px] group cursor-pointer" onclick="filterCategory('Lehengas')">
+<img src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?q=80&w=900&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-700">
+<div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent"></div>
+<div class="absolute bottom-4 left-4 text-white"><div class="text-[11px] tracking-widest font-bold">BRIDAL LEHENGAS</div><div class="serif text-2xl font-bold">From ₹7,999</div></div>
+<span class="absolute top-4 left-4 bg-white text-black text-[11px] font-bold px-2 py-1 rounded-full">BESTSELLER</span>
+</div>
+<div class="grid gap-4">
+<div class="relative rounded-[28px] overflow-hidden min-h-[160px] group cursor-pointer" onclick="filterCategory('Sherwanis')">
+<img src="https://images.unsplash.com/photo-1587271636175-90d58cdad458?q=80&w=900&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-700">
+<div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+<div class="absolute bottom-4 left-4 text-white"><div class="serif text-xl font-bold">Sherwanis</div><div class="text-xs opacity-80">Groom Edit • ₹9,499+</div></div>
+</div>
+<div class="relative rounded-[28px] overflow-hidden min-h-[160px] group cursor-pointer" onclick="filterCategory('Sweaters & Jackets')">
+<img src="https://images.unsplash.com/photo-1434389677669-e08b4cac3105?q=80&w=900&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-700">
+<div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+<div class="absolute bottom-4 left-4 text-white"><div class="serif text-xl font-bold">Sweaters & Jackets</div><div class="text-xs opacity-80">“Best shop for good sweaters”</div></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- QUICK ACTIONS STRIP -->
+<div class="max-w-7xl mx-auto px-4">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+<a href="tel:09341959192" class="bg-white border border-black/5 rounded-2xl p-4 flex items-center gap-3 hover:shadow-md transition"><span class="w-10 h-10 bg-emerald-50 rounded-full flex items-center justify-center">📞</span><div><div class="font-bold text-sm">Call Store</div><div class="text-xs text-zinc-500">093419 59192</div></div></a>
+<a href="https://wa.me/919341959192" target="_blank" class="bg-white border border-black/5 rounded-2xl p-4 flex items-center gap-3 hover:shadow-md transition"><span class="w-10 h-10 bg-green-50 rounded-full flex items-center justify-center">💬</span><div><div class="font-bold text-sm">WhatsApp</div><div class="text-xs text-zinc-500">Chat & order</div></div></a>
+<a href="https://www.google.com/maps/dir/?api=1&destination=WESTERN+STORES+176%2F2+Commercial+Street+Tasker+Town+Shivaji+Nagar+Bengaluru+560001" target="_blank" class="bg-white border border-black/5 rounded-2xl p-4 flex items-center gap-3 hover:shadow-md transition"><span class="w-10 h-10 bg-blue-50 rounded-full flex items-center justify-center">🧭</span><div><div class="font-bold text-sm">Directions</div><div class="text-xs text-zinc-500">Get route</div></div></a>
+<button onclick="shareStore()" class="bg-white border border-black/5 rounded-2xl p-4 flex items-center gap-3 text-left hover:shadow-md transition"><span class="w-10 h-10 bg-amber-50 rounded-full flex items-center justify-center">↗</span><div><div class="font-bold text-sm">Share & Save</div><div class="text-xs text-zinc-500">Send to friends</div></div></button>
+</div>
+</div>
+
+<!-- CATEGORIES -->
+<section id="categories" class="max-w-7xl mx-auto px-4 pt-12">
+<div class="flex items-end justify-between">
+<div><div class="text-xs tracking-[0.2em] font-bold text-maroon">SHOP BY OCCASION</div><h2 class="serif text-3xl sm:text-4xl font-black mt-1">Curated Collections</h2></div>
+<button onclick="filterCategory('All')" class="text-sm font-bold underline hidden sm:block">View All →</button>
+</div>
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-6">
+<div onclick="filterCategory('Lehengas')" class="cursor-pointer bg-white rounded-[24px] p-3 border border-black/5 hover:shadow-xl transition group">
+<img src="https://images.unsplash.com/photo-1610652492500-ded49ceeb378?q=80&w=600&auto=format&fit=crop" class="rounded-[18px] h-44 w-full object-cover group-hover:scale-[1.02] transition">
+<div class="flex justify-between items-center mt-3 px-1"><div><div class="font-bold">Lehengas</div><div class="text-xs text-zinc-500">120+ designs</div></div><span class="w-8 h-8 bg-black text-white rounded-full flex items-center justify-center">→</span></div>
+</div>
+<div onclick="filterCategory('Sherwanis')" class="cursor-pointer bg-white rounded-[24px] p-3 border border-black/5 hover:shadow-xl transition group">
+<img src="https://images.unsplash.com/photo-1622122201714-77da0ca8e5d2?q=80&w=600&auto=format&fit=crop" class="rounded-[18px] h-44 w-full object-cover group-hover:scale-[1.02] transition">
+<div class="flex justify-between items-center mt-3 px-1"><div><div class="font-bold">Sherwanis</div><div class="text-xs text-zinc-500">85+ designs</div></div><span class="w-8 h-8 bg-black text-white rounded-full flex items-center justify-center">→</span></div>
+</div>
+<div onclick="filterCategory('Sarees')" class="cursor-pointer bg-white rounded-[24px] p-3 border border-black/5 hover:shadow-xl transition group">
+<img src="https://images.unsplash.com/photo-1610189844726-46e0a3419ffa?q=80&w=600&auto=format&fit=crop" class="rounded-[18px] h-44 w-full object-cover group-hover:scale-[1.02] transition">
+<div class="flex justify-between items-center mt-3 px-1"><div><div class="font-bold">Sarees & Suits</div><div class="text-xs text-zinc-500">200+ designs</div></div><span class="w-8 h-8 bg-black text-white rounded-full flex items-center justify-center">→</span></div>
+</div>
+<div onclick="filterCategory('Sweaters & Jackets')" class="cursor-pointer bg-white rounded-[24px] p-3 border border-black/5 hover:shadow-xl transition group">
+<img src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?q=80&w=600&auto=format&fit=crop" class="rounded-[18px] h-44 w-full object-cover group-hover:scale-[1.02] transition">
+<div class="flex justify-between items-center mt-3 px-1"><div><div class="font-bold">Western & Knitwear</div><div class="text-xs text-zinc-500">Jackets • Sweaters</div></div><span class="w-8 h-8 bg-black text-white rounded-full flex items-center justify-center">→</span></div>
+</div>
+</div>
+</section>
+
+<!-- COLLECTION -->
+<section id="collection" class="max-w-7xl mx-auto px-4 pt-12">
+<div class="bg-white rounded-[28px] border border-black/5 p-4 sm:p-6">
+<div class="flex flex-col lg:flex-row justify-between gap-4">
+<div>
+<h2 class="serif text-3xl font-black">The Wedding Edit <span class="text-base font-sans font-normal text-zinc-500 align-middle" id="resultCount"></span></h2>
+<p class="text-sm text-zinc-500">Handpicked pieces from our Shivaji Nagar store — try in store or order on WhatsApp.</p>
+</div>
+<div class="flex flex-wrap gap-2 items-center">
+<select id="sortSel" onchange="applyFilters()" class="border border-zinc-200 rounded-full px-4 py-2.5 text-sm bg-white">
+<option value="featured">Sort: Featured</option><option value="low">Price: Low to High</option><option value="high">Price: High to Low</option><option value="rating">Top Rated</option>
+</select>
+<select id="priceSel" onchange="applyFilters()" class="border border-zinc-200 rounded-full px-4 py-2.5 text-sm bg-white">
+<option value="all">All Prices</option><option value="0-5000">Under ₹5,000</option><option value="5000-15000">₹5k – ₹15k</option><option value="15000-99999">₹15k+</option>
+</select>
+</div>
+</div>
+
+<div class="flex gap-2 mt-5 overflow-x-auto no-scrollbar pb-1" id="chipRow">
+<button data-cat="All" onclick="filterCategory('All')" class="chip active whitespace-nowrap px-5 py-2.5 rounded-full border border-zinc-200 bg-white text-sm font-semibold">All</button>
+<button data-cat="Lehengas" onclick="filterCategory('Lehengas')" class="chip whitespace-nowrap px-5 py-2.5 rounded-full border border-zinc-200 bg-white text-sm font-semibold">Lehengas</button>
+<button data-cat="Sherwanis" onclick="filterCategory('Sherwanis')" class="chip whitespace-nowrap px-5 py-2.5 rounded-full border border-zinc-200 bg-white text-sm font-semibold">Sherwanis</button>
+<button data-cat="Sarees" onclick="filterCategory('Sarees')" class="chip whitespace-nowrap px-5 py-2.5 rounded-full border border-zinc-200 bg-white text-sm font-semibold">Sarees & Suits</button>
+<button data-cat="Sweaters & Jackets" onclick="filterCategory('Sweaters & Jackets')" class="chip whitespace-nowrap px-5 py-2.5 rounded-full border border-zinc-200 bg-white text-sm font-semibold">Sweaters & Jackets</button>
+</div>
+
+<div id="productGrid" class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5 mt-6"></div>
+<div id="emptyState" class="hidden text-center py-16"><div class="text-4xl">👗</div><p class="font-bold mt-2">No matches found</p><p class="text-sm text-zinc-500">Try another search or category</p><button onclick="filterCategory('All');document.getElementById('searchInput').value='';applyFilters()" class="mt-3 bg-black text-white px-5 py-2 rounded-full text-sm">Clear filters</button></div>
+</div>
+</section>
+
+<!-- REVIEWS + AI SUMMARY -->
+<section id="reviews" class="max-w-7xl mx-auto px-4 pt-12">
+<div class="grid lg:grid-cols-12 gap-5">
+<!-- Summary like Google -->
+<div class="lg:col-span-4 bg-white rounded-[28px] border border-black/5 p-6">
+<div class="flex items-center gap-2 text-xs font-bold text-zinc-500"><span class="text-lg">✦</span> GOOGLE REVIEW SUMMARY <span class="ml-auto bg-blue-50 text-blue-700 px-2 py-1 rounded-full text-[11px]">AI Summarised</span></div>
+<div class="flex items-center gap-5 mt-5">
+<div><div class="serif text-[64px] leading-none font-black">3.9</div><div class="text-amber-500 text-xl tracking-widest">★★★★<span class="text-zinc-300">★</span></div><div class="text-xs text-zinc-500 mt-1">1,096 reviews</div></div>
+<div class="flex-1 space-y-2 text-xs font-semibold">
+<div class="rate-bar" onclick="filterReviews(5)"><span class="w-3">5</span><div class="bar-track"><div class="bar-fill" style="width:49%"></div></div><span class="text-zinc-400 w-8">537</span></div>
+<div class="rate-bar" onclick="filterReviews(4)"><span class="w-3">4</span><div class="bar-track"><div class="bar-fill" style="width:19%"></div></div><span class="text-zinc-400 w-8">208</span></div>
+<div class="rate-bar" onclick="filterReviews(3)"><span class="w-3">3</span><div class="bar-track"><div class="bar-fill" style="width:12%"></div></div><span class="text-zinc-400 w-8">131</span></div>
+<div class="rate-bar" onclick="filterReviews(2)"><span class="w-3">2</span><div class="bar-track"><div class="bar-fill" style="width:7%"></div></div><span class="text-zinc-400 w-8">77</span></div>
+<div class="rate-bar" onclick="filterReviews(1)"><span class="w-3">1</span><div class="bar-track"><div class="bar-fill" style="width:13%"></div></div><span class="text-zinc-400 w-8">143</span></div>
+</div>
+</div>
+<div class="gold-line my-5"></div>
+<p class="text-[14px] leading-relaxed"><b>People say</b> this store offers a great collection of wedding outfits, including sherwanis and lehengas, with reasonable prices and helpful staff.</p>
+<p class="text-[13px] text-zinc-500 mt-2">Other reviews mention products can be misrepresented and delivery can be delayed. <span class="text-blue-600 font-semibold">+128 more</span></p>
+<button onclick="showToast('Full AI summary opening in Google Reviews…')" class="mt-4 text-sm font-bold text-blue-700">Learn more →</button>
+
+<div class="mt-6 bg-cream rounded-2xl p-4">
+<div class="font-bold text-sm">Write a review</div>
+<div class="flex gap-1 mt-2" id="starInput">
+<button onclick="setRating(1)" class="text-2xl text-zinc-300">★</button><button onclick="setRating(2)" class="text-2xl text-zinc-300">★</button><button onclick="setRating(3)" class="text-2xl text-zinc-300">★</button><button onclick="setRating(4)" class="text-2xl text-zinc-300">★</button><button onclick="setRating(5)" class="text-2xl text-zinc-300">★</button>
+</div>
+<input id="revName" placeholder="Your name" class="w-full mt-3 border border-zinc-200 rounded-xl px-3 py-2.5 text-sm bg-white">
+<textarea id="revText" placeholder="Share your experience..." class="w-full mt-2 border border-zinc-200 rounded-xl px-3 py-2.5 text-sm h-20 bg-white"></textarea>
+<button onclick="submitReview()" class="w-full bg-black text-white py-2.5 rounded-full font-bold text-sm mt-2">Post Review</button>
+</div>
+</div>
+
+<!-- Reviews List -->
+<div class="lg:col-span-8 bg-white rounded-[28px] border border-black/5 p-6">
+<div class="flex flex-wrap justify-between items-center gap-3">
+<h3 class="serif text-2xl font-black">What Customers Say <span id="revFilterLabel" class="text-sm font-sans font-normal text-zinc-500"></span></h3>
+<div class="flex gap-2">
+<button onclick="filterReviews('all')" class="px-4 py-2 rounded-full border text-xs font-bold bg-black text-white">All Reviews</button>
+<button onclick="filterReviews(5)" class="px-4 py-2 rounded-full border text-xs font-bold">5★ Only</button>
+</div>
+</div>
+<div id="reviewList" class="space-y-5 mt-6 max-h-[560px] overflow-y-auto pr-2"></div>
+</div>
+</div>
+</section>
+
+<!-- PHOTOS -->
+<section id="photos" class="max-w-7xl mx-auto px-4 pt-12">
+<div class="flex justify-between items-end"><div><div class="text-xs tracking-[0.2em] font-bold text-maroon">INSIDE THE STORE</div><h2 class="serif text-3xl font-black mt-1">Photos & Latest Drops</h2></div><span class="text-sm text-zinc-500 hidden sm:block">Tap any photo to view</span></div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-3 mt-6" id="photoGrid"></div>
+</section>
+
+<!-- VISIT US -->
+<section id="visit" class="max-w-7xl mx-auto px-4 pt-12 pb-12">
+<div class="grid lg:grid-cols-12 gap-5">
+<div class="lg:col-span-5 bg-[#1C1414] text-white rounded-[28px] p-6 sm:p-8">
+<div class="text-gold text-xs tracking-[0.2em] font-bold">VISIT OUR STORE</div>
+<h2 class="serif text-3xl font-black mt-2">Western Stores,<br>Shivaji Nagar</h2>
+<p class="text-white/70 text-sm mt-3 leading-relaxed">THE ENTRANCE OF, 176/2, Commercial Street, Tasker Town, Shivaji Nagar, Bengaluru, Karnataka 560001</p>
+<div class="space-y-3 mt-6 text-sm">
+<div class="flex justify-between border-b border-white/10 pb-2"><span>Monday – Sunday</span><b>9:30 AM – 9:30 PM</b></div>
+<div class="flex justify-between border-b border-white/10 pb-2"><span>Phone</span><a href="tel:09341959192" class="text-gold font-bold">093419 59192</a></div>
+<div class="flex justify-between"><span>Speciality</span><b class="text-right">Wedding Wear</b></div>
+</div>
+<div class="grid grid-cols-2 gap-3 mt-6">
+<a href="https://www.google.com/maps/dir/?api=1&destination=WESTERN+STORES+176%2F2+Commercial+Street+Bengaluru" target="_blank" class="bg-white text-black text-center py-3 rounded-full font-bold text-sm">Get Directions</a>
+<button onclick="openAppointment()" class="bg-maroon text-white py-3 rounded-full font-bold text-sm">Book Trial</button>
+</div>
+
+<div class="bg-white/10 rounded-2xl p-4 mt-6">
+<div class="font-bold text-sm">Quick Enquiry on WhatsApp</div>
+<input id="enqName" placeholder="Your name" class="w-full mt-3 bg-white text-black rounded-xl px-3 py-2.5 text-sm">
+<select id="enqOcc" class="w-full mt-2 bg-white text-black rounded-xl px-3 py-2.5 text-sm"><option>Wedding - Lehenga</option><option>Wedding - Sherwani</option><option>Saree / Suit</option><option>Sweater / Jacket</option></select>
+<button onclick="sendEnquiry()" class="w-full bg-[#25D366] text-white py-2.5 rounded-full font-bold text-sm mt-3">Send on WhatsApp →</button>
+</div>
+</div>
+<div class="lg:col-span-7 bg-white rounded-[28px] border border-black/5 overflow-hidden">
+<iframe src="https://www.google.com/maps?q=176/2%20Commercial%20Street%20Tasker%20Town%20Shivaji%20Nagar%20Bengaluru%20560001&output=embed" class="w-full h-[340px] border-0" loading="lazy"></iframe>
+<div class="p-5 flex flex-wrap gap-3 items-center justify-between">
+<div class="flex items-center gap-3"><span class="w-10 h-10 bg-red-50 rounded-full flex items-center justify-center">📍</span><div><div class="font-bold text-sm">Commercial Street, Bengaluru</div><div class="text-xs text-zinc-500">Near Tasker Town • Easy parking nearby</div></div></div>
+<button onclick="showToast('Location saved to your list ✓')" class="px-5 py-2.5 rounded-full border font-bold text-sm">♡ Save</button>
+</div>
+</div>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-[#1C1414] text-white">
+<div class="max-w-7xl mx-auto px-4 py-10 grid md:grid-cols-4 gap-8">
+<div><div class="serif font-black text-xl">WESTERN STORES</div><p class="text-white/60 text-sm mt-2">Ethnic clothing boutique specializing in wedding wear, lehengas & sherwanis since years in Shivaji Nagar.</p><div class="text-gold mt-3">★★★★☆ 3.9 (1,096)</div></div>
+<div><div class="font-bold text-sm tracking-widest">SHOP</div><ul class="text-white/60 text-sm space-y-2 mt-3"><li>Lehengas</li><li>Sherwanis</li><li>Sarees</li><li>Sweaters & Jackets</li></ul></div>
+<div><div class="font-bold text-sm tracking-widest">STORE</div><ul class="text-white/60 text-sm space-y-2 mt-3"><li>176/2 Commercial Street</li><li>Tasker Town, Shivaji Nagar</li><li>Bengaluru 560001</li><li>093419 59192</li></ul></div>
+<div><div class="font-bold text-sm tracking-widest">OPENING HOURS</div><ul class="text-white/60 text-sm space-y-2 mt-3"><li>Mon – Sun: 9:30 AM – 9:30 PM</li><li class="text-emerald-400 font-semibold">● Open Now</li></ul></div>
+</div>
+<div class="border-t border-white/10 text-center py-4 text-xs text-white/40">© 2026 Western Stores, Bengaluru • Made with care for wedding celebrations</div>
+</footer>
+
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/919341959192?text=Hi%20Western%20Stores%2C%20I%20need%20help%20choosing%20wedding%20wear" target="_blank" class="fixed bottom-5 right-5 z-50 bg-[#25D366] text-white w-14 h-14 rounded-full shadow-2xl flex items-center justify-center text-2xl">💬</a>
+
+<!-- CART DRAWER -->
+<div id="cartOverlay" onclick="closeCart()" class="fixed inset-0 bg-black/50 z-50 hidden"></div>
+<aside id="cartDrawer" class="drawer fixed right-0 top-0 h-full w-full max-w-md bg-white z-50 translate-x-full flex flex-col">
+<div class="p-5 border-b flex justify-between items-center"><div><div class="serif font-black text-xl">Your Cart</div><div class="text-xs text-zinc-500" id="cartSub">0 items</div></div><button onclick="closeCart()" class="w-9 h-9 bg-zinc-100 rounded-full">✕</button></div>
+<div id="cartItems" class="flex-1 overflow-y-auto p-5 space-y-4"></div>
+<div class="p-5 border-t bg-cream">
+<div class="flex justify-between font-bold"><span>Total</span><span id="cartTotal">₹0</span></div>
+<p class="text-xs text-zinc-500 mt-1">Free trial in store • Pay in store or UPI on WhatsApp</p>
+<button onclick="checkoutWhatsApp()" class="w-full bg-[#25D366] text-white py-3.5 rounded-full font-bold mt-3">Order on WhatsApp →</button>
+<button onclick="closeCart()" class="w-full py-2 text-sm font-semibold">Continue shopping</button>
+</div>
+</aside>
+
+<!-- QUICK VIEW MODAL -->
+<div id="qvModal" class="fixed inset-0 bg-black/60 z-50 hidden items-end sm:items-center justify-center p-0 sm:p-4">
+<div class="bg-white w-full max-w-3xl rounded-t-[28px] sm:rounded-[28px] overflow-hidden max-h-[92vh] overflow-y-auto">
+<div class="grid md:grid-cols-2">
+<div class="relative"><img id="qvImg" class="w-full h-72 md:h-full object-cover"><button onclick="closeQV()" class="absolute top-4 left-4 w-9 h-9 bg-white rounded-full">←</button><span id="qvBadge" class="absolute top-4 right-4 bg-maroon text-white text-xs font-bold px-3 py-1 rounded-full"></span></div>
+<div class="p-6">
+<div class="text-xs font-bold text-maroon tracking-widest" id="qvCat"></div>
+<h3 id="qvName" class="serif text-2xl font-black mt-1"></h3>
+<div class="flex items-center gap-2 mt-2"><span class="text-amber-500" id="qvStars"></span><span class="text-xs text-zinc-500" id="qvRating"></span></div>
+<div class="flex items-baseline gap-2 mt-3"><span id="qvPrice" class="text-2xl font-black"></span><span id="qvOld" class="line-through text-zinc-400"></span><span id="qvOff" class="bg-emerald-50 text-emerald-700 text-xs font-bold px-2 py-1 rounded-full"></span></div>
+<p id="qvDesc" class="text-sm text-zinc-600 mt-3 leading-relaxed"></p>
+<div class="mt-4"><div class="text-xs font-bold">SIZE</div><div class="flex gap-2 mt-2" id="qvSizes"></div></div>
+<div class="mt-4"><div class="text-xs font-bold">COLOUR</div><div class="flex gap-2 mt-2" id="qvColors"></div></div>
+<div class="flex gap-3 mt-6">
+<button id="qvAdd" class="flex-1 bg-black text-white py-3.5 rounded-full font-bold text-sm">Add to Cart</button>
+<button id="qvWish" class="w-12 h-12 border rounded-full text-xl">♡</button>
+</div>
+<button onclick="showToast('Free trial booked! Our team will WhatsApp you shortly.')" class="w-full mt-3 border border-maroon text-maroon py-3 rounded-full font-bold text-sm">Book Free In-Store Trial</button>
+<div class="text-xs text-zinc-500 mt-3 text-center">✓ Quality checked • ✓ Easy alteration help • ✓ Same-day pickup in Shivaji Nagar</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- APPOINTMENT MODAL -->
+<div id="apptModal" class="fixed inset-0 bg-black/60 z-50 hidden items-center justify-center p-4">
+<div class="bg-white rounded-[24px] w-full max-w-md p-6">
+<div class="flex justify-between"><h3 class="serif font-black text-xl">Book Wedding Trial</h3><button onclick="closeAppointment()" class="w-8 h-8 bg-zinc-100 rounded-full">✕</button></div>
+<p class="text-sm text-zinc-500 mt-1">Free 30-min styling session at Commercial Street store.</p>
+<input id="apptName" placeholder="Your name" class="w-full border rounded-xl px-3 py-3 mt-4 text-sm">
+<input id="apptPhone" placeholder="Phone / WhatsApp" class="w-full border rounded-xl px-3 py-3 mt-2 text-sm">
+<div class="grid grid-cols-2 gap-2 mt-2"><input type="date" id="apptDate" class="border rounded-xl px-3 py-3 text-sm"><select id="apptTime" class="border rounded-xl px-3 py-3 text-sm"><option>11:00 AM</option><option>1:00 PM</option><option>4:00 PM</option><option>6:30 PM</option></select></div>
+<button onclick="submitAppt()" class="w-full bg-maroon text-white py-3.5 rounded-full font-bold mt-4">Confirm Appointment</button>
+</div>
+</div>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" class="fixed inset-0 bg-black/90 z-[60] hidden items-center justify-center p-4" onclick="this.classList.add('hidden');this.classList.remove('flex')">
+<img id="lightImg" class="max-w-full max-h-[85vh] rounded-2xl object-contain">
+</div>
+
+<!-- TOAST -->
+<div id="toast" class="fixed bottom-24 left-1/2 -translate-x-1/2 bg-black text-white px-5 py-3 rounded-full text-sm font-semibold shadow-2xl z-[70] hidden"></div>
+
+<script>
+const products=[
+{id:1,name:"Crimson Zardozi Bridal Lehenga",cat:"Lehengas",price:14999,old:18999,rating:4.6,reviews:214,img:"https://images.unsplash.com/photo-1610030469983-98e550d6193c?q=80&w=800&auto=format&fit=crop",badge:"BESTSELLER",desc:"Hand-embroidered zardozi lehenga with dupatta, perfect for sangeet to reception. Premium georgette flare."},
+{id:2,name:"Ivory Pearl Sherwani — Groom",cat:"Sherwanis",price:12999,old:15999,rating:4.7,reviews:189,img:"https://images.unsplash.com/photo-1587271636175-90d58cdad458?q=80&w=800&auto=format&fit=crop",badge:"GROOM PICK",desc:"Classic ivory sherwani with pearl buttons and gold piping. Regal fit for the modern groom."},
+{id:3,name:"Blush Pink Floral Lehenga Set",cat:"Lehengas",price:8999,old:11499,rating:4.4,reviews:132,img:"https://images.unsplash.com/photo-1610652492500-ded49ceeb378?q=80&w=800&auto=format&fit=crop",badge:"NEW",desc:"Soft blush floral lehenga, lightweight and comfortable for all-day celebrations."},
+{id:4,name:"Banarasi Silk Saree — Maroon Gold",cat:"Sarees",price:6499,old:8499,rating:4.5,reviews:98,img:"https://images.unsplash.com/photo-1610189844726-46e0a3419ffa?q=80&w=800&auto=format&fit=crop",badge:"",desc:"Authentic Banarasi silk with gold zari border and unstitched blouse piece."},
+{id:5,name:"Charcoal Knit Sweater — Unisex",cat:"Sweaters & Jackets",price:1499,old:2199,rating:4.3,reviews:276,img:"https://images.unsplash.com/photo-1434389677669-e08b4cac3105?q=80&w=800&auto=format&fit=crop",badge:"VALUE PICK",desc:"Best shop for good sweaters and jackets — reviewers love our knitwear quality."},
+{id:6,name:"Emerald Indo-Western Jacket",cat:"Sweaters & Jackets",price:3499,old:4999,rating:4.2,reviews:87,img:"https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?q=80&w=800&auto=format&fit=crop",badge:"",desc:"Emerald jacket that pairs with kurtas or jeans. Smart layered look."},
+{id:7,name:"Royal Maroon Kurta Sherwani",cat:"Sherwanis",price:9499,old:11999,rating:4.5,reviews:156,img:"https://images.unsplash.com/photo-1622122201714-77da0ca8e5d2?q=80&w=800&auto=format&fit=crop",badge:"",desc:"Deep maroon sherwani-kurta with minimal embroidery. Great for engagement."},
+{id:8,name:"Pastel Chikankari Suit Set",cat:"Sarees",price:4999,old:6499,rating:4.4,reviews:143,img:"https://images.unsplash.com/photo-1583391733956-6c78276477e2?q=80&w=800&auto=format&fit=crop",badge:"TRENDING",desc:"Pastel chikankari suit with dupatta — festive yet breathable."},
+{id:9,name:"Sunset Orange Haldi Lehenga",cat:"Lehengas",price:7499,old:9999,rating:4.3,reviews:76,img:"https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?q=80&w=800&auto=format&fit=crop",badge:"HALDI EDIT",desc:"Vibrant haldi lehenga, mirror work and comfortable lining."},
+{id:10,name:"Navy Blue Nehru Jacket Suit",cat:"Sherwanis",price:10999,old:13999,rating:4.6,reviews:112,img:"https://images.unsplash.com/photo-1594938298603-c8148c4dae35?q=80&w=800&auto=format&fit=crop",badge:"",desc:"Nehru jacket over kurta — contemporary groom styling."},
+{id:11,name:"Cream Wool Cardigan",cat:"Sweaters & Jackets",price:1899,old:2799,rating:4.4,reviews:201,img:"https://images.unsplash.com/photo-1576871337622-98d48d1cf531?q=80&w=800&auto=format&fit=crop",badge:"",desc:"Cozy cream cardigan, perfect for Bengaluru evenings."},
+{id:12,name:"Red Kanjivaram Saree",cat:"Sarees",price:11999,old:14999,rating:4.8,reviews:94,img:"https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?q=80&w=800&auto=format&fit=crop",badge:"PREMIUM",desc:"Temple border Kanjivaram with gold motif — heirloom quality."},
+];
+let reviews=[
+{name:"Priya Sharma",stars:5,time:"2 weeks ago",text:"Great service, good choice of clothing. Bought a lehenga for my sister's wedding — staff helped with blouse fitting and price was very reasonable.",initial:"P",color:"bg-rose-500"},
+{name:"Rahul Verma",stars:5,time:"1 month ago",text:"So comfortable clothes and staffs are very friendly.. will visit again. Sherwani collection is superb for the price.",initial:"R",color:"bg-blue-600"},
+{name:"Ananya Iyer",stars:4,time:"1 month ago",text:"Best shop for good sweaters and jackets. Do try it once. Also loved their saree section, very helpful team.",initial:"A",color:"bg-amber-500"},
+{name:"Mohammed Faiz",stars:5,time:"2 months ago",text:"Took my family for wedding shopping. Huge collection of sherwanis and lehengas at Commercial Street. Highly recommend trial.",initial:"M",color:"bg-emerald-600"},
+{name:"Kavitha Reddy",stars:4,time:"3 months ago",text:"Good collection, staff is knowledgeable. Delivery took a day extra but quality was as shown after trial. Happy overall.",initial:"K",color:"bg-purple-600"},
+{name:"Suresh Kumar",stars:3,time:"3 months ago",text:"Collection is good but during peak wedding season it gets crowded. Visit on weekday for better attention.",initial:"S",color:"bg-zinc-700"},
+{name:"Divya Nair",stars:5,time:"4 months ago",text:"Found my dream lehenga here! Reasonable price compared to other Shivaji Nagar shops. Will come again for reception outfit.",initial:"D",color:"bg-pink-600"},
+];
+let cart=[], wishlist=new Set(), currentCat='All', qvProduct=null, selectedSize='M', selectedColor='#7B1E26', userRating=5;
+
+function fmt(n){return '₹'+n.toLocaleString('en-IN')}
+function stars(r){let s='';for(let i=1;i<=5;i++)s+=`<span class="${i<=Math.round(r)?'text-amber-500':'text-zinc-300'}">★</span>`;return s}
+function renderProducts(list){
+ const grid=document.getElementById('productGrid');
+ document.getElementById('resultCount').textContent=`(${list.length} products)`;
+ document.getElementById('emptyState').classList.toggle('hidden',list.length>0);
+ grid.innerHTML=list.map(p=>{
+  const off=Math.round((p.old-p.price)/p.old*100);
+  const wished=wishlist.has(p.id);
+  return `<div class="card bg-[#FAF7F2] rounded-[22px] overflow-hidden border border-black/5 group">
+   <div class="relative overflow-hidden cursor-pointer" onclick="openQV(${p.id})">
+    <img src="${p.img}" class="card-img w-full h-56 sm:h-64 object-cover">
+    ${p.badge?`<span class="absolute top-3 left-3 bg-white text-black text-[10px] font-black px-2.5 py-1 rounded-full">${p.badge}</span>`:''}
+    <button onclick="event.stopPropagation();toggleWish(${p.id})" class="absolute top-3 right-3 w-9 h-9 bg-white rounded-full shadow flex items-center justify-center text-lg">${wished?'♥':'♡'}</button>
+    <span class="absolute bottom-3 left-3 bg-black/80 text-white text-[11px] px-2 py-1 rounded-full">${off}% OFF</span>
+   </div>
+   <div class="p-4">
+    <div class="text-[10px] font-bold tracking-widest text-maroon">${p.cat.toUpperCase()}</div>
+    <h4 class="font-bold leading-tight mt-1 cursor-pointer hover:text-maroon" onclick="openQV(${p.id})">${p.name}</h4>
+    <div class="flex items-center gap-1 text-sm mt-1">${stars(p.rating)}<span class="text-xs text-zinc-500 ml-1">${p.rating} (${p.reviews})</span></div>
+    <div class="flex items-baseline gap-2 mt-2"><span class="font-black">${fmt(p.price)}</span><span class="text-xs line-through text-zinc-400">${fmt(p.old)}</span></div>
+    <div class="flex gap-2 mt-3">
+     <button onclick="addToCart(${p.id})" class="flex-1 bg-black text-white py-2.5 rounded-full text-xs font-bold">Add to Cart</button>
+     <button onclick="openQV(${p.id})" class="px-4 border border-zinc-300 rounded-full text-xs font-bold">View</button>
+    </div>
+   </div></div>`}).join('');
+}
+function applyFilters(){
+ let q=(document.getElementById('searchInput')?.value||'').toLowerCase();
+ let price=document.getElementById('priceSel').value, sort=document.getElementById('sortSel').value;
+ let list=products.filter(p=>(currentCat==='All'||p.cat===currentCat)&&(p.name.toLowerCase().includes(q)||p.cat.toLowerCase().includes(q)));
+ if(price!=='all'){let [a,b]=price.split('-').map(Number);list=list.filter(p=>p.price>=a&&p.price<=b)}
+ if(sort==='low')list.sort((a,b)=>a.price-b.price); if(sort==='high')list.sort((a,b)=>b.price-a.price); if(sort==='rating')list.sort((a,b)=>b.rating-a.rating);
+ renderProducts(list);
+}
+function filterCategory(cat){
+ currentCat=cat;
+ document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('active',c.dataset.cat===cat));
+ applyFilters();
+ document.getElementById('collection').scrollIntoView({behavior:'smooth'});
+}
+function toggleSearch(){document.getElementById('searchBar').classList.toggle('hidden');document.getElementById('searchInput').focus()}
+function toggleWish(id){wishlist.has(id)?wishlist.delete(id):wishlist.add(id);document.getElementById('wishCount').textContent=wishlist.size;showToast(wishlist.has(id)?'Added to wishlist ♥':'Removed from wishlist');applyFilters()}
+function toggleWishlistView(){if(wishlist.size===0)return showToast('Your wishlist is empty — tap ♡ on products');renderProducts(products.filter(p=>wishlist.has(p.id)));document.getElementById('collection').scrollIntoView()}
+function addToCart(id,size='M',qty=1){
+ let p=products.find(x=>x.id===id);
+ let found=cart.find(c=>c.id===id&&c.size===size);
+ if(found)found.qty+=qty; else cart.push({id,size,qty});
+ updateCart(); showToast(`${p.name} added to cart ✓`);
+}
+function updateCart(){
+ let count=cart.reduce((s,c)=>s+c.qty,0), total=cart.reduce((s,c)=>s+products.find(p=>p.id===c.id).price*c.qty,0);
+ document.getElementById('cartCount').textContent=count;
+ document.getElementById('cartSub').textContent=`${count} item${count!==1?'s':''}`;
+ document.getElementById('cartTotal').textContent=fmt(total);
+ let box=document.getElementById('cartItems');
+ if(cart.length===0){box.innerHTML=`<div class="text-center py-16"><div class="text-5xl">🛍️</div><p class="font-bold mt-3">Your cart is empty</p><p class="text-sm text-zinc-500">Add a lehenga or sherwani to get started</p></div>`;return}
+ box.innerHTML=cart.map(c=>{let p=products.find(x=>x.id===c.id);return `<div class="flex gap-3 bg-[#FAF7F2] p-3 rounded-2xl">
+  <img src="${p.img}" class="w-20 h-24 rounded-xl object-cover">
+  <div class="flex-1"><div class="font-bold text-sm leading-tight">${p.name}</div><div class="text-xs text-zinc-500">Size ${c.size} • ${p.cat}</div>
+  <div class="flex justify-between items-center mt-2"><span class="font-black">${fmt(p.price*c.qty)}</span>
+  <div class="flex items-center gap-2"><button onclick="chgQty(${p.id},'${c.size}',-1)" class="w-7 h-7 bg-white border rounded-full">−</button><span class="font-bold text-sm">${c.qty}</span><button onclick="chgQty(${p.id},'${c.size}',1)" class="w-7 h-7 bg-white border rounded-full">+</button></div></div></div>
+  <button onclick="removeCart(${p.id},'${c.size}')" class="text-zinc-400">✕</button></div>`}).join('');
+}
+function chgQty(id,size,d){let c=cart.find(x=>x.id===id&&x.size===size);if(c){c.qty+=d;if(c.qty<1)cart=cart.filter(x=>x!==c)}updateCart()}
+function removeCart(id,size){cart=cart.filter(x=>!(x.id===id&&x.size===size));updateCart()}
+function openCart(){document.getElementById('cartDrawer').classList.remove('translate-x-full');document.getElementById('cartOverlay').classList.remove('hidden')}
+function closeCart(){document.getElementById('cartDrawer').classList.add('translate-x-full');document.getElementById('cartOverlay').classList.add('hidden')}
+function checkoutWhatsApp(){
+ if(cart.length===0)return showToast('Cart is empty');
+ let msg='Hello Western Stores, I want to order:%0A'+cart.map(c=>{let p=products.find(x=>x.id===c.id);return `• ${p.name} (Size ${c.size}) x${c.qty} — ${fmt(p.price*c.qty)}`}).join('%0A')+`%0A%0ATotal: ${document.getElementById('cartTotal').textContent}%0APlease confirm availability.`;
+ window.open('https://wa.me/919341959192?text='+msg,'_blank');
+}
+function openQV(id){
+ qvProduct=products.find(p=>p.id===id); selectedSize='M';
+ document.getElementById('qvImg').src=qvProduct.img;
+ document.getElementById('qvBadge').textContent=qvProduct.badge||'';
+ document.getElementById('qvCat').textContent=qvProduct.cat;
+ document.getElementById('qvName').textContent=qvProduct.name;
+ document.getElementById('qvStars').innerHTML=stars(qvProduct.rating);
+ document.getElementById('qvRating').textContent=`${qvProduct.rating} · ${qvProduct.reviews} reviews`;
+ document.getElementById('qvPrice').textContent=fmt(qvProduct.price);
+ document.getElementById('qvOld').textContent=fmt(qvProduct.old);
+ document.getElementById('qvOff').textContent=Math.round((qvProduct.old-qvProduct.price)/qvProduct.old*100)+'% OFF';
+ document.getElementById('qvDesc').textContent=qvProduct.desc;
+ document.getElementById('qvSizes').innerHTML=['S','M','L','XL','XXL'].map(s=>`<button onclick="pickSize(this,'${s}')" class="sizeBtn px-4 py-2 rounded-full border text-sm font-bold ${s==='M'?'bg-black text-white':''}">${s}</button>`).join('');
+ document.getElementById('qvColors').innerHTML=['#7B1E26','#C9A86A','#1C1414','#065F46','#9333EA'].map(c=>`<button onclick="pickColor(this,'${c}')" class="colorBtn w-9 h-9 rounded-full border-2 ${c==='#7B1E26'?'border-black':'border-transparent'}" style="background:${c}"></button>`).join('');
+ document.getElementById('qvAdd').onclick=()=>{addToCart(qvProduct.id,selectedSize);const d=document.getElementById('cartDrawer');d.classList.remove('translate-x-full');document.getElementById('cartOverlay').classList.remove('hidden');closeQV()};
+ document.getElementById('qvWish').onclick=()=>toggleWish(qvProduct.id);
+ let m=document.getElementById('qvModal');m.classList.remove('hidden');m.classList.add('flex');
+}
+function pickSize(el,s){selectedSize=s;document.querySelectorAll('.sizeBtn').forEach(b=>b.classList.remove('bg-black','text-white'));el.classList.add('bg-black','text-white')}
+function pickColor(el,c){selectedColor=c;document.querySelectorAll('.colorBtn').forEach(b=>b.classList.replace('border-black','border-transparent'));el.classList.replace('border-transparent','border-black')}
+function closeQV(){let m=document.getElementById('qvModal');m.classList.add('hidden');m.classList.remove('flex')}
+
+function renderReviews(filter='all'){
+ let list=reviews.filter(r=>filter==='all'||r.stars===filter);
+ document.getElementById('revFilterLabel').textContent=filter==='all'?'':'· '+filter+'★ only';
+ document.getElementById('reviewList').innerHTML=list.length?list.map(r=>`
+ <div class="border-b border-zinc-100 pb-5">
+  <div class="flex gap-3">
+   <div class="w-10 h-10 ${r.color} text-white rounded-full flex items-center justify-center font-bold shrink-0">${r.initial}</div>
+   <div class="flex-1">
+    <div class="flex justify-between"><div class="font-bold text-sm">${r.name}</div><span class="text-xs text-zinc-400">${r.time}</span></div>
+    <div class="text-amber-500 text-sm mt-0.5">${stars(r.stars)}</div>
+    <p class="text-sm text-zinc-700 mt-1.5 leading-relaxed">${r.text}</p>
+    <div class="flex gap-4 mt-2 text-xs font-semibold text-zinc-500"><button onclick="this.textContent='👍 Helpful (1)'" class="hover:text-black">👍 Helpful</button><button onclick="showToast('Thanks for sharing')" class="hover:text-black">Share</button></div>
+   </div></div></div>`).join(''):`<p class="text-center py-10 text-zinc-500">No ${filter}★ reviews yet in this view.</p>`;
+}
+function filterReviews(f){renderReviews(f);showToast(f==='all'?'Showing all reviews':'Filtered to '+f+'★ reviews')}
+function setRating(n){userRating=n;document.querySelectorAll('#starInput button').forEach((b,i)=>b.className=`text-2xl ${i<n?'text-amber-500':'text-zinc-300'}`)}
+function submitReview(){
+ let n=document.getElementById('revName').value.trim(), t=document.getElementById('revText').value.trim();
+ if(!n||!t)return showToast('Please add name and review');
+ reviews.unshift({name:n,stars:userRating,time:"Just now",text:t,initial:n[0].toUpperCase(),color:"bg-maroon"});
+ renderReviews(); document.getElementById('revName').value='';document.getElementById('revText').value='';
+ showToast('Thank you! Your review is posted ✓');
+}
+const photos=[
+"https://images.unsplash.com/photo-1610030469983-98e550d6193c?q=80&w=800&auto=format&fit=crop",
+"https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=800&auto=format&fit=crop",
+"https://images.unsplash.com/photo-1587271636175-90d58cdad458?q=80&w=800&auto=format&fit=crop",
+"https://images.unsplash.com/photo-1445205170230-053b83016050?q=80&w=800&auto=format&fit=crop",
+"https://images.unsplash.com/photo-1610652492500-ded49ceeb378?q=80&w=800&auto=format&fit=crop",
+"https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?q=80&w=800&auto=format&fit=crop",
+"https://images.unsplash.com/photo-1434389677669-e08b4cac3105?q=80&w=800&auto=format&fit=crop",
+"https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?q=80&w=800&auto=format&fit=crop"];
+document.getElementById('photoGrid').innerHTML=photos.map(src=>`<div class="rounded-[20px] overflow-hidden cursor-pointer group h-44 sm:h-52" onclick="openLight('${src}')"><img src="${src}" class="w-full h-full object-cover group-hover:scale-110 transition duration-500"></div>`).join('');
+function openLight(src){document.getElementById('lightImg').src=src;let l=document.getElementById('lightbox');l.classList.remove('hidden');l.classList.add('flex')}
+function openAppointment(){let m=document.getElementById('apptModal');m.classList.remove('hidden');m.classList.add('flex');document.getElementById('apptDate').valueAsDate=new Date()}
+function closeAppointment(){let m=document.getElementById('apptModal');m.classList.add('hidden');m.classList.remove('flex')}
+function submitAppt(){
+ let n=document.getElementById('apptName').value.trim(),p=document.getElementById('apptPhone').value.trim(),d=document.getElementById('apptDate').value,t=document.getElementById('apptTime').value;
+ if(!n||!p||!d)return showToast('Please fill name, phone and date');
+ closeAppointment();
+ let msg=`Hello Western Stores, I want to book a wedding trial.%0AName: ${n}%0APhone: ${p}%0ADate: ${d} at ${t}%0APlease confirm.`;
+ showToast('Appointment request sent! Opening WhatsApp…');
+ setTimeout(()=>window.open(`https://wa.me/919341959192?text=${msg}`,'_blank'),600);
+}
+function sendEnquiry(){
+ let n=document.getElementById('enqName').value||'Customer', o=document.getElementById('enqOcc').value;
+ window.open(`https://wa.me/919341959192?text=Hello Western Stores, I am ${encodeURIComponent(n)}. I am interested in ${encodeURIComponent(o)}. Please share details.`,'_blank');
+}
+function shareStore(){
+ if(navigator.share){navigator.share({title:'Western Stores Bengaluru',text:'Great wedding wear collection at Western Stores, Shivaji Nagar. 3.9★ (1,096 reviews)',url:location.href})}
+ else{navigator.clipboard.writeText(location.href);showToast('Link copied! Share it with friends ✓')}
+}
+function showToast(msg){let t=document.getElementById('toast');t.textContent=msg;t.classList.remove('hidden');setTimeout(()=>t.classList.add('hidden'),2600)}
+// open status logic
+(function(){
+ let h=new Date().getHours()+new Date().getMinutes()/60;
+ let open=h>=9.5 && h<21.5;
+ document.getElementById('openText').textContent=open?'Open · Closes 9:30 pm':'Closed · Opens 9:30 AM';
+ document.getElementById('openDot').className=`w-2 h-2 rounded-full inline-block ${open?'bg-emerald-400 animate-pulse':'bg-red-400'}`;
+})();
+setRating(5); renderProducts(products); renderReviews(); updateCart();
+</script>
+</body>
+</html>
